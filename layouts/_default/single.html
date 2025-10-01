@@ -1,0 +1,98 @@
+{{ define "main" }}
+
+<article class="post-container">
+  <header class="post-header">
+    <div class="post-meta">
+      {{ with .Params.categories }}
+        {{ range . }}
+          <span class="post-category">{{ . }}</span>
+        {{ end }}
+      {{ end }}
+      <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+      <span class="post-read-time">{{ math.Round (div (countwords .Content) 200.0) }} min read</span>
+    </div>
+    
+    <h1 class="post-title">{{ .Title }}</h1>
+    
+    {{ with .Description }}
+      <p class="post-subtitle">{{ . }}</p>
+    {{ end }}
+    
+    {{ with .Params.author }}
+      <div class="post-author">
+        <span class="author-avatar">👨‍🎓</span>
+        <div class="author-info">
+          <div class="author-name">{{ . }}</div>
+          <div class="author-role">Author</div>
+        </div>
+      </div>
+    {{ end }}
+  </header>
+
+  {{ with .Params.cover.image }}
+    <div class="post-featured-image">
+      <img src="{{ . | relURL }}" alt="{{ $.Params.cover.alt | default $.Title }}" />
+    </div>
+  {{ else }}
+    {{ with $.Params.image }}
+      <div class="post-featured-image">
+        <img src="{{ . | relURL }}" alt="{{ $.Title }}" />
+      </div>
+    {{ end }}
+  {{ end }}
+
+  <!-- Table of Contents -->
+  {{ $toc := .TableOfContents }}
+  {{ if $toc }}
+    <nav class="table-of-contents" id="toc">
+      <div class="toc-header">
+        <h3>Table of Contents</h3>
+        <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents">
+          <span class="toc-icon">📋</span>
+        </button>
+      </div>
+      <div class="toc-content" id="tocContent">
+        {{ $toc }}
+      </div>
+    </nav>
+  {{ end }}
+
+  <div class="post-content" id="postContent">
+    {{ .Content }}
+  </div>
+
+  <footer class="post-footer">
+    {{ with .Params.tags }}
+      <div class="post-tags">
+        <span class="tag-label">Tags:</span>
+        {{ range . }}
+          <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="post-tag">{{ . }}</a>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    <div class="post-navigation">
+      {{ with .NextInSection }}
+        <a href="{{ .RelPermalink }}" class="nav-link prev-post">
+          <span class="nav-arrow">←</span>
+          <div class="nav-text">
+            <div class="nav-label">Previous</div>
+            <div class="nav-title">{{ .Title }}</div>
+          </div>
+        </a>
+      {{ end }}
+      
+      {{ with .PrevInSection }}
+        <a href="{{ .RelPermalink }}" class="nav-link next-post">
+          <div class="nav-text">
+            <div class="nav-label">Next</div>
+            <div class="nav-title">{{ .Title }}</div>
+          </div>
+          <span class="nav-arrow">→</span>
+        </a>
+      {{ end }}
+    </div>
+  </footer>
+</article>
+
+{{ end }}

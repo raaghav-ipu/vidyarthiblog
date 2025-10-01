@@ -1,0 +1,18 @@
+name = "Vidyaarthi Theme"
+license = "MIT"
+licenselink = "https://github.com/yourusername/vidyaarthi-theme/blob/main/LICENSE"
+description = "A modern, responsive Hugo theme with glassmorphism design extracted from custom PaperMod modifications. Features include search functionality, mobile-responsive design, and beautiful gradient backgrounds."
+homepage = "https://github.com/yourusername/vidyaarthi-theme"
+tags = ["blog", "responsive", "modern", "glassmorphism", "gradient", "academic", "education"]
+features = ["responsive", "search", "glassmorphism", "gradient-backgrounds", "mobile-optimized", "code-highlighting", "math-support"]
+min_version = "0.116.0"
+
+[author]
+  name = "Raaghav Bhardwaj"
+  homepage = "https://github.com/yourusername"
+
+# If you have a demo site, add it here
+# [original]
+#   name = "Your Name"
+#   homepage = "https://yoursite.com"
+#   repo = "https://github.com/yourusername/your-site"

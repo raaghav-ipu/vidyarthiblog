@@ -1,0 +1,75 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Vidyarthi Vrittanta 📜'
+theme = 'PaperMod'
+
+# Output formats for search
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+# Pagination
+[pagination]
+pagerSize = 9
+
+[params]
+# Show post summaries on homepage
+ShowReadingTime = true
+ShowShareButtons = true
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowWordCount = true
+ShowRssButtonInSectionTermList = true
+UseHugoToc = true
+disableSpecial1stPost = false
+disableScrollToTop = true
+comments = false
+hidemeta = false
+hideSummary = false
+showtoc = false
+tocopen = false
+
+# Enable math rendering
+math = true
+
+# Homepage mode
+env = "production"
+defaultTheme = "auto"
+
+# Main sections for homepage
+mainSections = ["posts", "econometrics", "hugo"]
+
+# Social links
+[params.social]
+twitter = "#"
+linkedin = "#"
+github = "#"
+youtube = "#"
+
+[params.homeInfoParams]
+Title = "Welcome to Vidyarthi Vrittanta 📜"
+Content = "Where ancient enumeration meets modern inference"
+
+[params.footer]
+text = "Made with ❤️ by Vidyarthi Vrittanta"
+hideCopyright = true
+
+# Menu configuration
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 10
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 20
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+    ordered = false

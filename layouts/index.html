@@ -1,0 +1,139 @@
+{{ define "main" }}
+
+<!-- Pinned Posts Section -->
+{{ $pinnedPosts := where (where site.RegularPages "Type" "in" site.Params.mainSections) "Params.pinned" true }}
+{{ if $pinnedPosts }}
+<section class="pinned-posts-section">
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="pin-icon">📌</span>
+      Pinned Posts
+    </h2>
+    <p class="section-description">Featured content you don't want to miss</p>
+  </div>
+  
+  <div class="pinned-posts-grid">
+    {{ range $pinnedPosts }}
+      <a href="{{ .RelPermalink }}" class="blog-card pinned-card">
+        <div class="pinned-badge">
+          <span class="pin-icon">📌</span>
+          <span>Pinned</span>
+        </div>
+        <div class="blog-card-image">
+          {{ if .Params.cover.image }}
+            <img src="{{ .Params.cover.image | relURL }}" alt="{{ .Params.cover.alt | default .Title }}" loading="lazy">
+          {{ else if .Params.image }}
+            <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" loading="lazy">
+          {{ else }}
+            <img src="{{ "images/cover.png" | relURL }}" alt="{{ .Title }}" loading="lazy">
+          {{ end }}
+        </div>
+        <div class="blog-card-content">
+          <div>
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Description | default (.Summary | plainify | htmlUnescape | truncate 120) }}</p>
+          </div>
+          <div class="blog-card-meta">
+            <span class="blog-card-author">{{ .Params.author | default "Vidyarthi Vrittanta" }}</span>
+            <span class="blog-card-date">{{ .Date.Format "2006-01-02" }}</span>
+          </div>
+        </div>
+      </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+<!-- Regular Posts Section -->
+{{ if $pinnedPosts }}
+<section class="regular-posts-section">
+  <div class="section-header regular-posts-header">
+    <h2 class="section-title">Latest Posts</h2>
+    <p class="section-description">Explore our recent content and insights</p>
+  </div>
+</section>
+{{ end }}
+
+<section class="blog-posts" id="blogPosts">
+  {{ $regularPages := where (where site.RegularPages "Type" "in" site.Params.mainSections) "Params.pinned" "!=" true }}
+  {{ $paginator := .Paginate $regularPages }}
+  
+  {{ range $paginator.Pages }}
+    <a href="{{ .RelPermalink }}" class="blog-card">
+      <div class="blog-card-image">
+        {{ if .Params.cover.image }}
+          <img src="{{ .Params.cover.image | relURL }}" alt="{{ .Params.cover.alt | default .Title }}" loading="lazy">
+        {{ else if .Params.image }}
+          <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" loading="lazy">
+        {{ else }}
+          <img src="{{ "images/cover.png" | relURL }}" alt="{{ .Title }}" loading="lazy">
+        {{ end }}
+      </div>
+      <div class="blog-card-content">
+        <div>
+          <h2>{{ .Title }}</h2>
+          <p>{{ .Description | default (.Summary | plainify | htmlUnescape | truncate 150) }}</p>
+        </div>
+        <div class="blog-card-meta">
+          <span class="blog-card-author">{{ .Params.author | default "Vidyarthi Vrittanta" }}</span>
+          <span class="blog-card-date">{{ .Date.Format "2006-01-02" }}</span>
+        </div>
+      </div>
+    </a>
+  {{ end }}
+</section>
+
+<!-- Pagination Controls -->
+{{ if gt $paginator.TotalPages 1 }}
+<div class="pagination-container">
+  <div class="pagination-info">
+    <span id="paginationInfo">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+  </div>
+  <div class="pagination-controls">
+    {{ if $paginator.HasPrev }}
+      <a href="{{ $paginator.Prev.URL }}" class="pagination-btn">← Previous</a>
+    {{ else }}
+      <button class="pagination-btn" disabled>← Previous</button>
+    {{ end }}
+    
+    <div class="page-numbers" id="pageNumbers">
+      {{ $currentPage := $paginator.PageNumber }}
+      {{ $totalPages := $paginator.TotalPages }}
+      
+      {{ if gt $totalPages 1 }}
+        {{ if gt $currentPage 3 }}
+          <a href="{{ $paginator.First.URL }}" class="page-number">1</a>
+          {{ if gt $currentPage 4 }}
+            <span class="page-ellipsis">...</span>
+          {{ end }}
+        {{ end }}
+        
+        {{ range $paginator.Pagers }}
+          {{ if and (ge .PageNumber (sub $currentPage 2)) (le .PageNumber (add $currentPage 2)) }}
+            {{ if eq .PageNumber $currentPage }}
+              <button class="page-number active">{{ .PageNumber }}</button>
+            {{ else }}
+              <a href="{{ .URL }}" class="page-number">{{ .PageNumber }}</a>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        
+        {{ if lt $currentPage (sub $totalPages 2) }}
+          {{ if lt $currentPage (sub $totalPages 3) }}
+            <span class="page-ellipsis">...</span>
+          {{ end }}
+          <a href="{{ $paginator.Last.URL }}" class="page-number">{{ $totalPages }}</a>
+        {{ end }}
+      {{ end }}
+    </div>
+    
+    {{ if $paginator.HasNext }}
+      <a href="{{ $paginator.Next.URL }}" class="pagination-btn">Next →</a>
+    {{ else }}
+      <button class="pagination-btn" disabled>Next →</button>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{ end }}

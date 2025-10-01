@@ -1,0 +1,38 @@
+<header class="main-header glass">
+  <div class="header-container">
+    <a href="{{ "/" | relURL }}" class="logo">📜 {{ .Site.Title | default "Vidyarthi Vrittanta" }}</a>
+    <nav class="main-nav">
+      {{ range .Site.Menus.main }}
+        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+      {{ end }}
+      <!-- Add a simple dropdown for categories if needed -->
+      {{ $categories := .Site.Taxonomies.categories }}
+      {{ if $categories }}
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Categories</a>
+        <div class="dropdown-menu">
+          {{ range $categories.ByCount }}
+            <a href="{{ .Page.RelPermalink }}" class="dropdown-item">{{ .Page.Title }}</a>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </nav>
+    <div class="search-container">
+      <div class="search-input-wrapper">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="searchBox"
+          class="search-input"
+          placeholder="Search posts..."
+          aria-label="Search blog posts"
+        />
+        <button class="search-clear" id="searchClear" aria-label="Clear search">×</button>
+      </div>
+      <div id="searchResults" class="search-results"></div>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu">☰</button>
+  </div>
+  <nav id="mobileNav" class="mobile-nav"></nav>
+</header>

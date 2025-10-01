@@ -1,0 +1,49 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Vidyaarthi Vrittanta 📜'
+theme = 'vidyaarthi-theme'
+
+# Output formats for search
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+# Pagination
+[pagination]
+pagerSize = 9
+
+[params]
+description = "Where ancient enumeration meets modern inference"
+author = "Raaghav Bhardwaj"
+
+# Enable math rendering
+math = true
+
+# Main sections for homepage
+mainSections = ["posts", "econometrics", "hugo"]
+
+# Social links
+[params.social]
+twitter = "#"
+linkedin = "#"
+github = "#"
+youtube = "#"
+
+# Menu configuration
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 10
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 20
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+    ordered = false

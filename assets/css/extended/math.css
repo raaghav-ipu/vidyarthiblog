@@ -1,0 +1,32 @@
+/* KaTeX Math formula styling */
+.katex {
+    font-size: 1.1em;
+}
+
+.katex-display {
+    margin: 1em 0;
+    text-align: center;
+}
+
+/* Ensure math doesn't overflow on mobile */
+.katex-display > .katex {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* Dark mode math support */
+[data-theme="dark"] .katex {
+    color: var(--content);
+}
+
+/* Responsive math */
+@media (max-width: 768px) {
+    .katex {
+        font-size: 1em;
+    }
+    
+    .katex-display > .katex {
+        font-size: 0.9em;
+    }
+}

@@ -1,0 +1,79 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Vidyaarthi Theme Demo'
+theme = 'vidyaarthi-theme'
+
+# Output formats for search
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+# Pagination
+[pagination]
+pagerSize = 9
+
+[params]
+description = "A modern Hugo theme with glassmorphism design"
+author = "Raaghav Bhardwaj"
+
+# Math support
+math = true
+
+# Main sections for homepage
+mainSections = ["posts", "blog", "articles"]
+
+# Social links
+[params.social]
+twitter = "https://twitter.com/yourusername"
+linkedin = "https://linkedin.com/in/yourusername"
+github = "https://github.com/yourusername"
+youtube = "https://youtube.com/@yourusername"
+
+# Menu configuration
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 10
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 20
+
+[[menu.main]]
+name = "Posts"
+url = "/posts/"
+weight = 30
+
+[[menu.main]]
+name = "Categories"
+url = "/categories/"
+weight = 40
+
+[[menu.main]]
+name = "Tags"
+url = "/tags/"
+weight = 50
+
+# Markup configuration
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+    ordered = false
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ''
+    hl_inline = false
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = false
+    noHl = false
+    style = 'github'
+    tabWidth = 4
